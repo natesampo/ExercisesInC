@@ -1,3 +1,10 @@
+/*
+	This file contains the code written for Exercise 1 of Software Systems 2019.
+
+	In particular, this file is a card counting system where the user inputs
+	a card and the program keeps track of the value of betting.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
