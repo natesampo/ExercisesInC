@@ -39,6 +39,7 @@ void find_track(char search_for[])
 void find_track_regex(char pattern[])
 {
     regex_t regex;
+    int i;
 
     // Check if the user input can be translated to a regular
     // expression. If so, store the regular expression into
