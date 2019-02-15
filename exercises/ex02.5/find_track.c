@@ -54,7 +54,7 @@ void find_track_regex(char pattern[])
     // for a match with the regular expression stored in
     // 'regex'. If we encounter a match, print it and
     // continue.
-    for (int i=0; i<NUM_TRACKS; i++) {
+    for (i=0; i<NUM_TRACKS; i++) {
         if (regexec(&regex, tracks[i], 0, NULL, 0) == 0) {
             printf("Track %i: '%s'\n", i, tracks[i]);
         }
