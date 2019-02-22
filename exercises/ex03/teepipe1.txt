@@ -1,0 +1,4 @@
+Use the '-a' argument to enter append mode. Default mode is overwrite.
+'-i', '-ignore-interrupts', '-p', and '--output-error' were not implemented, but are checked for.
+You just did it, but '-h' and '--help' open the help menu.
+Use '-v' or '--version' to find the version number.
