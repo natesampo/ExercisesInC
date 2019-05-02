@@ -157,10 +157,11 @@ int main(int argc, char *argv[])
     while (1) {
         printf("Waiting for connection on port %d\n", port);
         int connect_d = open_client_socket();
+        
+        if (fork() != 0) continue;
 
         if (say(connect_d, intro_msg) == -1) {
             close(connect_d);
-            continue;
         }
 
         read_in(connect_d, buf, sizeof(buf));
@@ -179,7 +180,9 @@ int main(int argc, char *argv[])
             continue;
         }
 
+        shutdown(connect_d, 2);
         close(connect_d);
+        exit(1);
     }
     return 0;
 }
