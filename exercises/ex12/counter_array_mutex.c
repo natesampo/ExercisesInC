@@ -5,6 +5,15 @@ License: GNU GPLv3
 
 */
 
+/*
+    Time without mutexes: 0.064s
+    Time with mutexes: 0.276s
+
+    Looks like mutexes impose a lot of overhead. This is a very significant
+    time difference! But in adding mutexes, we go from over 100,000 synchronization
+    errors to 0, so I'd say that it is definitely worthwhile.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>

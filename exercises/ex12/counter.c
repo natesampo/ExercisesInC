@@ -9,7 +9,22 @@ License: GNU GPLv3
 #include <stdlib.h>
 #include <pthread.h>
 
-#define NUM_CHILDREN 5
+#define NUM_CHILDREN 30000
+
+/*
+    When running with 30000 children, the counter increments to the right amount
+    (30000), but sometimes this will happen:
+
+    counter = 29960
+    counter = 29961
+    counter = 29961
+    counter = 29963
+
+    Here, two threads have printed the same number, then both incremented, adding +2
+    to the next number. This means that the threads are definitely running
+    concurrently, as otherwise the counter would print numbers incrementing by
+    +1 every time with no exceptions.
+*/
 
 /* Print an error message and exit.
 */

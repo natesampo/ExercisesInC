@@ -5,6 +5,10 @@ License: GNU GPLv3
 
 */
 
+/*
+    134531 synchronization errors with no mutexes. Yikes!
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
