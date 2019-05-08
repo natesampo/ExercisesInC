@@ -34,6 +34,21 @@ Point *make_point(double x, double y) {
     return new;
 }
 
+typedef struct {
+    Point *center;
+    double radius;
+    char *color;
+} Circle;
+
+*Circle make_circle(Point *center, double radius, char *color) {
+    Circle *circle = malloc(sizeof(Circle));
+    memcpy(circle.center, center, sizeof(Point));
+    circle.radius = radius;
+    circle.color = strdup(color);
+
+    return circle;
+}
+
 /* Return string representation
 
 point: Point

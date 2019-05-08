@@ -6,6 +6,8 @@ License: MIT License https://opensource.org/licenses/MIT
 
 #include <stdlib.h>
 
+#include "rand.h"
+
 // generate a random float using the algorithm described
 // at http://allendowney.com/research/rand
 float my_random_float()
@@ -78,7 +80,36 @@ float my_random_float2()
 // compute a random double using my algorithm
 double my_random_double()
 {
-    // TODO: fill this in
+    long long int x, y;
+    long long int exp = 1022;
+    long long int mask = 1;
+    long long int mant;
+
+    union {
+        double f;
+        long long int i;
+    } b;
+
+    while(1) {
+        x = random();
+        y = random();
+        if(((x << 32 ) | y) == 0){
+            exp -= 31;
+        }
+        else {
+            break;
+        }
+    }
+
+    while(((x << 32 ) | y) & mask) {
+        mask <<= 1;
+        exp--;
+    }
+
+    mant = ((x << 32 ) | y) >> 11;
+    b.i = (exp << 52) | mant;
+
+    return b.f;
 }
 
 // return a constant (this is a dummy function for time trials)

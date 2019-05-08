@@ -15,6 +15,37 @@ License: MIT License https://opensource.org/licenses/MIT
 
 #include "rand.h"
 
+/*
+    Output of this program (without random double):
+
+    210.269000 ms    dummy
+    843.621000 ms    dummy2
+    948.959000 ms    random_float
+    868.513000 ms    my_random_float
+    2178.453000 ms   my_random_float2
+    894.993000 ms    random_float
+
+    dummy was the fastest, but that is to be expected as it doesn't actually
+    generate a random number and just returns 0.5. The fastest random function
+    is dummy2, because that just takes a random number and casts it to a float,
+    and does no other operations.
+
+
+    Output (with random double):
+
+    213.791000 ms    dummy
+    864.028000 ms    dummy2
+    886.686000 ms    random_float
+    934.314000 ms    my_random_float
+    2106.218000 ms   my_random_float2
+    890.816000 ms    random_float
+    877.385000 ms    random_double
+    879.545000 ms    my_random_double
+
+    random_double was slightly faster than my_random_double, but not by much,
+    only 2ms faster.
+*/
+
 /* Get the total of user time and system time used by this process.
 */
 double get_seconds() {
@@ -53,7 +84,7 @@ double time_func(int iters, float(*func)())
 }
 
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     double time;
     int iters = 100000000;
@@ -76,4 +107,12 @@ main(int argc, char *argv[])
 
     time = time_func(iters, random_float);
     printf("%f ms \t random_float\n", time);
+
+    time = time_func(iters, random_float);
+    printf("%f ms \t random_double\n", time);
+
+    time = time_func(iters, random_float);
+    printf("%f ms \t my_random_double\n", time);
+
+    return 1;
 }
