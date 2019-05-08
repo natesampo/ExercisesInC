@@ -178,6 +178,32 @@ Node *make_something() {
     return node3;
 }
 
+// My function that iterates over a list and frees the entire thing
+void list_free(Node* head) {
+    if(head == NULL) {
+        return;
+    }
+
+    while(head->next != NULL) {
+        Node* walker = head;
+        Node* prev = head;
+
+        while(walker->next != NULL) {
+            prev = walker;
+            walker = walker->next;
+            print_list(&head);
+        }
+
+        prev->next = NULL;
+        if(walker != head) {
+            free(walker);
+        }
+    }
+
+    free(head);
+
+}
+
 
 int main() {
     // make a list of even numbers
@@ -197,6 +223,9 @@ int main() {
 
     printf("test_list\n");
     print_list(&test_list);
+    list_free(test_list);
+
+    puts("--------------------");
 
     // make an empty list
     printf("empty\n");
@@ -205,9 +234,13 @@ int main() {
     // add an element to the empty list
     insert_by_index(&empty, 1, 0);
     print_list(&empty);
+    list_free(empty);
+
+    puts("--------------------");
 
     Node *something = make_something();
-    free(something);
+    print_list(&something);
+    list_free(something);
 
     return 0;
 }
